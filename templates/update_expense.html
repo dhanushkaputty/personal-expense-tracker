@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Expense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Expense</h2>
+        <form method="POST">
+            <label>Title:</label>
+            <input type="text" name="title" value="{{ expense.title }}" required><br>
+
+            <label>Amount:</label>
+            <input type="number" name="amount" value="{{ expense.amount }}" required><br>
+
+            <label>Type:</label>
+            <select name="type">
+                <option value="Income" {% if expense.type == "Income" %}selected{% endif %}>Income</option>
+                <option value="Expense" {% if expense.type == "Expense" %}selected{% endif %}>Expense</option>
+            </select><br>
+
+            <label>Category:</label>
+            <input type="text" name="category" value="{{ expense.category }}" required><br>
+
+            <label>Date:</label>
+            <input type="date" name="date" value="{{ expense.date.strftime('%Y-%m-%d') }}" required><br>
+
+            <button type="submit" class="btn">Update</button>
+        </form>
+        <br>
+        <a href="{{ url_for('index') }}">Back</a>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Expense Tracker</h1>
+        <a href="{{ url_for('add_expense') }}" class="btn">+ Add New</a>
+
+        {% if expenses|length == 0 %}
+            <p>No expenses found.</p>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.title }}</td>
+                    <td>₹{{ expense.amount }}</td>
+                    <td>{{ expense.type }}</td>
+                    <td>{{ expense.category }}</td>
+                    <td>{{ expense.date.strftime('%d-%m-%Y') }}</td>
+                    <td>
+                        <a href="{{ url_for('update_expense', id=expense._id) }}">Edit</a> |
+                        <a href="{{ url_for('delete_expense', id=expense._id) }}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+
+
